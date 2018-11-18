@@ -10,7 +10,7 @@ public class MovieRowMapper implements RowMapper<Movie> {
     @Override
     public Movie mapRow(ResultSet resultSet, int i) throws SQLException {
         Movie movie = new Movie();
-        movie.setId(resultSet.getInt("Id"));
+        movie.setId(resultSet.getInt("id"));
         movie.setNameRussian(resultSet.getString("nameRussian"));
         movie.setNameNative(resultSet.getString("nameNative"));
         movie.setYearOfRelease(resultSet.getInt("yearOfRelease"));

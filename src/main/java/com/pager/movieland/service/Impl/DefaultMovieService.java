@@ -9,14 +9,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MovieServiceImpl implements MovieService {
+public class DefaultMovieService implements MovieService {
 
-    @Autowired
+
     private MovieDao movieDao;
 
     @Override
     public List<Movie> getAll() {
+
         return movieDao.getAll();
+
     }
 
+    @Autowired
+    public void setMovieDao(MovieDao movieDao) {
+        this.movieDao = movieDao;
+    }
 }

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MovieDaoImpl implements MovieDao {
-    private static final String GET_ALL_SQL = "SELECT m.movie_id id, m.name_ru nameRussian, m.name_orig nameNative, m.release_year yearOfRelease, m.rating, m.price, m.picture_path picturePath FROM movie m";
+public class JdbcMovieDao implements MovieDao {
+    private static final String GET_MOVIE_ALL_SQL = "SELECT m.movie_id id, m.name_ru nameRussian, m.name_orig nameNative, m.release_year yearOfRelease, m.rating, m.price, m.picture_path picturePath FROM movie m";
     public static final MovieRowMapper MOVIE_ROW_MAPPER = new MovieRowMapper();
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -21,9 +21,10 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public List<Movie> getAll() {
-        List<Movie> movies = jdbcTemplate.query(GET_ALL_SQL, MOVIE_ROW_MAPPER);
-//        logger.trace("Movies {}", movies);
-        logger.info("Movies {}", movies);
+        List<Movie> movies = jdbcTemplate.query(GET_MOVIE_ALL_SQL, MOVIE_ROW_MAPPER);
+
+        logger.trace("Movies {}", movies);
+
         return movies;
     }
 
