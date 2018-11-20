@@ -18,10 +18,11 @@
     <context:property-placeholder location="classpath:application.properties"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-        <property name="driverClassName" value="${dataSource.driver.class.name}"/>
+        <property name="driverClassName" value="${dataSource.driverClassName}"/>
         <property name="url" value="${dataSource.url}"/>
         <property name="username" value="${dataSource.user}"/>
         <property name="password" value="${dataSource.pass}"/>
+        <property name="maxTotal" value="${datasource.maxTotal}" />
     </bean>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
