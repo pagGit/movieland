@@ -57,7 +57,7 @@ public class MovieControllerTest {
 
         when(movieService.getAll()).thenReturn(Arrays.asList(movie));
 
-        mockMvc.perform(get("/v1/movie"))
+        mockMvc.perform(get("/movie"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$", hasSize(1)))
