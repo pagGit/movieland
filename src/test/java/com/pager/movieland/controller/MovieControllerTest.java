@@ -1,10 +1,14 @@
 package com.pager.movieland.controller;
 
+import com.pager.movieland.dao.MovieDao;
 import com.pager.movieland.entity.Movie;
 import com.pager.movieland.service.MovieService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
@@ -35,12 +39,17 @@ public class MovieControllerTest {
     private WebApplicationContext webApplicationContext;
 
     @Autowired
+    @InjectMocks
     private MovieService movieService;
+
+    @Mock
+    private MovieDao movieDao;
 
     private MockMvc mockMvc;
 
     @Before
     public void init() {
+        MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
     @Test

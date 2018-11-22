@@ -13,13 +13,4 @@
         <jdbc:script location="classpath:db/insert-data.sql" />
     </jdbc:embedded-database>
 
-
-    <bean id="movieService" class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="com.pager.movieland.service.MovieService" />
-    </bean>
-
-    <bean id="genreService" class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="com.pager.movieland.service.GenreService" />
-    </bean>
-
 </beans>
