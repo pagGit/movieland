@@ -3,3 +3,7 @@ INSERT INTO movie(movie_id, name_ru, name_orig, release_year, country, rating, p
 
 INSERT INTO genre(genre_id, genre_name) VALUES(1,'драма');
 INSERT INTO genre(genre_id, genre_name) VALUES(2,'криминал');
+
+INSERT INTO movie_genre(mg_id, movie_id, genre_id) VALUES(1, 1, 1);
+INSERT INTO movie_genre(mg_id, movie_id, genre_id) VALUES(2, 1, 2);
+INSERT INTO movie_genre(mg_id, movie_id, genre_id) VALUES(3, 2, 1);
