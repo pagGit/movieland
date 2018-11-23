@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public class JdbcMovieDao implements MovieDao {
     private static final String GET_MOVIE_ALL_SQL = "SELECT m.movie_id id, m.name_ru nameRussian, m.name_orig nameNative, m.release_year yearOfRelease, m.rating, m.price, m.picture_path picturePath FROM movie m";
+    private static final String GET_MOVIE_BY_GENRE_ID_SQL = "SELECT m.movie_id id, m.name_ru nameRussian, m.name_orig nameNative, m.release_year yearOfRelease, m.rating, m.price, m.picture_path picturePath FROM movie m, movie_genre mg where m.movie_id = mg.movie_id and mg.genre_id = ?";
     public static final MovieRowMapper MOVIE_ROW_MAPPER = new MovieRowMapper();
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -24,6 +25,15 @@ public class JdbcMovieDao implements MovieDao {
         List<Movie> movies = jdbcTemplate.query(GET_MOVIE_ALL_SQL, MOVIE_ROW_MAPPER);
 
         logger.trace("Movies {}", movies);
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getByGenre(int genreId) {
+        List<Movie> movies = jdbcTemplate.query(GET_MOVIE_BY_GENRE_ID_SQL, MOVIE_ROW_MAPPER, genreId);
+
+        logger.trace("Movies by genre. [GenryId = {}], [Movies: {}]", genreId, movies);
 
         return movies;
     }

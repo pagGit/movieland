@@ -15,9 +15,12 @@ public class DefaultMovieService implements MovieService {
 
     @Override
     public List<Movie> getAll() {
-
         return movieDao.getAll();
+    }
 
+    @Override
+    public List<Movie> getByGenre(int genreId) {
+        return movieDao.getByGenre(genreId);
     }
 
     @Autowired
