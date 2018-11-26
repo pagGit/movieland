@@ -14,17 +14,13 @@ import static org.mockito.Mockito.when;
 
 public class DefaultGenreServiceTest {
     @Test
-    public void getAll(){
+    public void getAll() {
         JdbcGenreDao jdbcGenreDao = mock(JdbcGenreDao.class);
 
         List<Genre> expectedGenres = new ArrayList<>();
-        Genre firstGenre = new Genre();
-        firstGenre.setId(1);
-        firstGenre.setName("драма");
+        Genre firstGenre = new Genre(1, "драма");
         expectedGenres.add(firstGenre);
-        Genre secondGenre = new Genre();
-        secondGenre.setId(2);
-        secondGenre.setName("криминал");
+        Genre secondGenre = new Genre(2, "криминал");
         expectedGenres.add(secondGenre);
 
         DefaultGenreService genreService = new DefaultGenreService();
@@ -38,13 +34,13 @@ public class DefaultGenreServiceTest {
 
         Genre actual1 = actualGenres.get(0);
         Genre expected1 = expectedGenres.get(0);
-        assertEquals(expected1.getId(),actual1.getId());
-        assertEquals(expected1.getName(),actual1.getName());
+        assertEquals(expected1.getId(), actual1.getId());
+        assertEquals(expected1.getName(), actual1.getName());
 
         Genre actual2 = actualGenres.get(1);
         Genre expected2 = expectedGenres.get(1);
-        assertEquals(expected2.getId(),actual2.getId());
-        assertEquals(expected2.getName(),actual2.getName());
+        assertEquals(expected2.getId(), actual2.getId());
+        assertEquals(expected2.getName(), actual2.getName());
 
     }
 }

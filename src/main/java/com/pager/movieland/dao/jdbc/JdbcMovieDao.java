@@ -1,6 +1,5 @@
 package com.pager.movieland.dao.jdbc;
 
-import com.pager.movieland.common.QueryBuilder;
 import com.pager.movieland.dao.MovieDao;
 import com.pager.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.pager.movieland.entity.Movie;
