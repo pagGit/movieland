@@ -1,5 +1,6 @@
 package com.pager.movieland.dao.jdbc;
 
+import com.pager.movieland.dao.GenreDao;
 import com.pager.movieland.entity.Genre;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,22 +18,21 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/applicationContext.xml", "file:src/main/webapp/WEB-INF/movieland-servlet.xml", "classpath:/test-context.xml"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class JdbcGenreDaoTest {
+public class CacheGenreDaoTest {
 
     @Autowired
-    @Qualifier("jdbcGenreDao")
-    private JdbcGenreDao jdbcGenreDao;
+    @Qualifier("cacheGenreDao")
+    private GenreDao cacheGenreDao;
 
     @Test
     public void testGetAll() {
-
         List<Genre> expectedGenres = new ArrayList<>();
         Genre firstGenre = new Genre(1, "драма");
         expectedGenres.add(firstGenre);
         Genre secondGenre = new Genre(2, "криминал");
         expectedGenres.add(secondGenre);
 
-        List<Genre> actualMovies = jdbcGenreDao.getAll();
+        List<Genre> actualMovies = cacheGenreDao.getAll();
         assertEquals(2, actualMovies.size());
 
         Genre actual1 = actualMovies.get(0);

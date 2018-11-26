@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -43,6 +44,7 @@ public class GenreControllerTest {
     private GenreService genreService;
 
     @Mock
+    @Qualifier("jdbcGenreDao")
     private GenreDao genreDao;
 
     private MockMvc mockMvc;
@@ -55,12 +57,8 @@ public class GenreControllerTest {
 
     @Test
     public void getAll() throws Exception {
-        Genre firstGenre = new Genre();
-        firstGenre.setId(1);
-        firstGenre.setName("драма");
-        Genre secondGenre = new Genre();
-        secondGenre.setId(2);
-        secondGenre.setName("криминал");
+        Genre firstGenre = new Genre(1, "драма");
+        Genre secondGenre = new Genre(2, "криминал");
 
         when(genreService.getAll()).thenReturn(Arrays.asList(firstGenre, secondGenre));
 
