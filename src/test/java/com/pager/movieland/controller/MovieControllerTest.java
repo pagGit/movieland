@@ -65,7 +65,7 @@ public class MovieControllerTest {
         movie.setPrice(150.5);
         movie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1._SX140_CR0,0,140,209_.jpg");
 
-        when(movieService.getAll()).thenReturn(Arrays.asList(movie));
+        when(movieService.getAll(null)).thenReturn(Arrays.asList(movie));
 
         mockMvc.perform(get("/movie"))
                 .andExpect(status().isOk())
@@ -92,7 +92,7 @@ public class MovieControllerTest {
         movie.setPrice(150.5);
         movie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1._SX140_CR0,0,140,209_.jpg");
 
-        when(movieService.getByGenre(2)).thenReturn(Arrays.asList(movie));
+        when(movieService.getByGenre(2, null)).thenReturn(Arrays.asList(movie));
 
         mockMvc.perform(get("/movie/genre/2"))
                 .andExpect(status().isOk())

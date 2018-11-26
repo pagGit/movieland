@@ -4,7 +4,6 @@ import com.pager.movieland.dao.jdbc.JdbcMovieDao;
 import com.pager.movieland.entity.Movie;
 import org.junit.Test;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,9 +40,9 @@ public class DefaultMovieServiceTest {
         DefaultMovieService movieService = new DefaultMovieService();
         movieService.setMovieDao(jdbcMovieDao);
 
-        when(jdbcMovieDao.getAll()).thenReturn(expectedMovies);
+        when(jdbcMovieDao.getAll(null)).thenReturn(expectedMovies);
 
-        List<Movie> actualMovies = movieService.getAll();
+        List<Movie> actualMovies = movieService.getAll(null);
 
         assertEquals(2, actualMovies.size());
 
@@ -96,9 +95,9 @@ public class DefaultMovieServiceTest {
         DefaultMovieService movieService = new DefaultMovieService();
         movieService.setMovieDao(jdbcMovieDao);
 
-        when(jdbcMovieDao.getByGenre(1)).thenReturn(expectedMovies);
+        when(jdbcMovieDao.getByGenre(1, null)).thenReturn(expectedMovies);
 
-        List<Movie> actualMovies = movieService.getByGenre(1);
+        List<Movie> actualMovies = movieService.getByGenre(1, null);
 
         assertEquals(2, actualMovies.size());
 

@@ -7,24 +7,32 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MovieController {
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private MovieService movieService;
 
     @GetMapping("/movie")
-    public List<Movie> getAll() {
-        return movieService.getAll();
+    public List<Movie> getAll(@RequestParam Map<String, String> requestParams) {
+
+        logger.debug("[requestParams = {}]", requestParams);
+
+        return movieService.getAll(requestParams);
     }
 
     @GetMapping("/movie/genre/{genreId}")
-    public List<Movie> getByGenre(@PathVariable int genreId) {
-        return movieService.getByGenre(genreId);
+    public List<Movie> getByGenre(@PathVariable int genreId, @RequestParam Map<String, String> requestParams) {
+
+        logger.debug("[requestParams = {}]", requestParams);
+
+        return movieService.getByGenre(genreId, requestParams);
     }
 
     @Autowired

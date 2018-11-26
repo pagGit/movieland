@@ -1,5 +1,6 @@
 package com.pager.movieland.dao.jdbc;
 
+import com.pager.movieland.common.QueryBuilder;
 import com.pager.movieland.dao.MovieDao;
 import com.pager.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.pager.movieland.entity.Movie;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class JdbcMovieDao implements MovieDao {
@@ -21,7 +23,9 @@ public class JdbcMovieDao implements MovieDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Movie> getAll() {
+    public List<Movie> getAll(Map<String, String> requestParams) {
+        String query = QueryBuilder.build(GET_MOVIE_ALL_SQL,requestParams);
+        logger.trace("New query {}", query);
         List<Movie> movies = jdbcTemplate.query(GET_MOVIE_ALL_SQL, MOVIE_ROW_MAPPER);
 
         logger.trace("Movies {}", movies);
@@ -30,10 +34,10 @@ public class JdbcMovieDao implements MovieDao {
     }
 
     @Override
-    public List<Movie> getByGenre(int genreId) {
+    public List<Movie> getByGenre(int genreId, Map<String, String> requestParams) {
         List<Movie> movies = jdbcTemplate.query(GET_MOVIE_BY_GENRE_ID_SQL, MOVIE_ROW_MAPPER, genreId);
 
-        logger.trace("Movies by genre. [GenryId = {}], [Movies: {}]", genreId, movies);
+        logger.trace("Movies by genre [GenreId = {}], [Movies: {}]", genreId, movies);
 
         return movies;
     }

@@ -10,7 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -44,7 +46,7 @@ public class JdbcMovieDaoTest {
         secondMiovie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1._SY209_CR0,0,140,209_.jpg");
         expectedMovies.add(secondMiovie);
 
-        List<Movie> actualMovies = jdbcMovieDao.getAll();
+        List<Movie> actualMovies = jdbcMovieDao.getAll(null);
         assertEquals(2, actualMovies.size());
 
         Movie actual1 = actualMovies.get(0);
@@ -94,7 +96,7 @@ public class JdbcMovieDaoTest {
         secondMiovie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1._SY209_CR0,0,140,209_.jpg");
         expectedMovies.add(secondMiovie);
 
-        List<Movie> actualMovies = jdbcMovieDao.getByGenre(1);
+        List<Movie> actualMovies = jdbcMovieDao.getByGenre(1, new HashMap());
         assertEquals(2, actualMovies.size());
 
         Movie actual1 = actualMovies.get(0);

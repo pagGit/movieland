@@ -1,0 +1,17 @@
+# movieland
+
+-------------------------------------------------------------
+[b-4] Get movies by genre
+Add possibility to get movies by genre.
+
+URL should be /v1/movie/genre/{genreId}, HTTP method GET.
+Response should be in JSON format.
+See response example in [b-1].
+-------------------------------------------------------------
+[b-5] Implement sorting
+
+While sending request to get all movies [b-1] and get movies by genre [b-3], user should be able to sort requested movies by rating (desc) or price (acs/desc).
+
+In order to do that, user should add parameter to request.
+For example, /v1/movie?rating=desc
+------------------------------------------------------------
