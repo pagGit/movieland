@@ -8,3 +8,8 @@ URL should be /v1/movie/genre/{genreId}, HTTP method GET.
 Response should be in JSON format.
 See response example in [b-1].
 -------------------------------------------------------------
+[t-1] Create genre cache
+
+1. As list of genres is rather static, we can save time on DB calling. Instead of reading genres from DB, we will create genre cache to store them all.
+2. In order to have relevant information, genre cache should be updated according to DB data each 4 hours.
+-------------------------------------------------------------
