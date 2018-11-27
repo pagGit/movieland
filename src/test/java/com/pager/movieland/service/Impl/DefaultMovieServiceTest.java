@@ -40,9 +40,9 @@ public class DefaultMovieServiceTest {
         DefaultMovieService movieService = new DefaultMovieService();
         movieService.setMovieDao(jdbcMovieDao);
 
-        when(jdbcMovieDao.getAll(null)).thenReturn(expectedMovies);
+        when(jdbcMovieDao.getAll()).thenReturn(expectedMovies);
 
-        List<Movie> actualMovies = movieService.getAll(null);
+        List<Movie> actualMovies = movieService.getAll();
 
         assertEquals(2, actualMovies.size());
 
@@ -95,9 +95,9 @@ public class DefaultMovieServiceTest {
         DefaultMovieService movieService = new DefaultMovieService();
         movieService.setMovieDao(jdbcMovieDao);
 
-        when(jdbcMovieDao.getByGenre(1, null)).thenReturn(expectedMovies);
+        when(jdbcMovieDao.getByGenre(1)).thenReturn(expectedMovies);
 
-        List<Movie> actualMovies = movieService.getByGenre(1, null);
+        List<Movie> actualMovies = movieService.getByGenre(1);
 
         assertEquals(2, actualMovies.size());
 
