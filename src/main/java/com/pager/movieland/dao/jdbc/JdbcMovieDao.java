@@ -1,5 +1,7 @@
 package com.pager.movieland.dao.jdbc;
 
+import com.pager.movieland.common.QueryBuilder;
+import com.pager.movieland.common.QueryParams;
 import com.pager.movieland.dao.MovieDao;
 import com.pager.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.pager.movieland.entity.Movie;
@@ -22,10 +24,10 @@ public class JdbcMovieDao implements MovieDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Movie> getAll(Map<String, String> requestParams) {
-        String query = QueryBuilder.build(GET_MOVIE_ALL_SQL,requestParams);
-        logger.trace("New query {}", query);
-        List<Movie> movies = jdbcTemplate.query(GET_MOVIE_ALL_SQL, MOVIE_ROW_MAPPER);
+    public List<Movie> getAll() {
+        String newQuery = QueryBuilder.build(GET_MOVIE_ALL_SQL);
+        logger.trace("New Query {}", newQuery);
+        List<Movie> movies = jdbcTemplate.query(newQuery, MOVIE_ROW_MAPPER);
 
         logger.trace("Movies {}", movies);
 
@@ -33,8 +35,34 @@ public class JdbcMovieDao implements MovieDao {
     }
 
     @Override
-    public List<Movie> getByGenre(int genreId, Map<String, String> requestParams) {
-        List<Movie> movies = jdbcTemplate.query(GET_MOVIE_BY_GENRE_ID_SQL, MOVIE_ROW_MAPPER, genreId);
+    public List<Movie> getAll(QueryParams queryParams) {
+        String newQuery = QueryBuilder.build(GET_MOVIE_ALL_SQL, queryParams);
+        logger.trace("New Query {}", newQuery);
+        List<Movie> movies = jdbcTemplate.query(newQuery, MOVIE_ROW_MAPPER);
+
+        logger.trace("Movies {}", movies);
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getByGenre(int genreId) {
+        String newQuery = QueryBuilder.build(GET_MOVIE_BY_GENRE_ID_SQL);
+        logger.trace("New Query {}", newQuery);
+
+        List<Movie> movies = jdbcTemplate.query(newQuery, MOVIE_ROW_MAPPER, genreId);
+
+        logger.trace("Movies by genre [GenreId = {}], [Movies: {}]", genreId, movies);
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getByGenre(int genreId, QueryParams queryParams) {
+        String newQuery = QueryBuilder.build(GET_MOVIE_BY_GENRE_ID_SQL, queryParams);
+        logger.trace("New Query {}", newQuery);
+
+        List<Movie> movies = jdbcTemplate.query(newQuery, MOVIE_ROW_MAPPER, genreId);
 
         logger.trace("Movies by genre [GenreId = {}], [Movies: {}]", genreId, movies);
 

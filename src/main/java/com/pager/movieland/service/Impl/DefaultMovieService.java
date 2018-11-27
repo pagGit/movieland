@@ -1,5 +1,6 @@
 package com.pager.movieland.service.Impl;
 
+import com.pager.movieland.common.QueryParams;
 import com.pager.movieland.dao.MovieDao;
 import com.pager.movieland.entity.Movie;
 import com.pager.movieland.service.MovieService;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DefaultMovieService implements MovieService {
@@ -15,13 +15,23 @@ public class DefaultMovieService implements MovieService {
     private MovieDao movieDao;
 
     @Override
-    public List<Movie> getAll(Map<String, String> requestParams) {
-        return movieDao.getAll(requestParams);
+    public List<Movie> getAll() {
+        return movieDao.getAll();
     }
 
     @Override
-    public List<Movie> getByGenre(int genreId, Map<String, String> requestParams) {
-        return movieDao.getByGenre(genreId, requestParams);
+    public List<Movie> getAll(QueryParams queryParams) {
+        return movieDao.getAll(queryParams);
+    }
+
+    @Override
+    public List<Movie> getByGenre(int genreId) {
+        return movieDao.getByGenre(genreId);
+    }
+
+    @Override
+    public List<Movie> getByGenre(int genreId, QueryParams queryParams) {
+        return movieDao.getByGenre(genreId, queryParams);
     }
 
     @Autowired

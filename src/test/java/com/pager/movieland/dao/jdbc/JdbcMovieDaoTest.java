@@ -46,7 +46,7 @@ public class JdbcMovieDaoTest {
         secondMiovie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1._SY209_CR0,0,140,209_.jpg");
         expectedMovies.add(secondMiovie);
 
-        List<Movie> actualMovies = jdbcMovieDao.getAll(null);
+        List<Movie> actualMovies = jdbcMovieDao.getAll();
         assertEquals(2, actualMovies.size());
 
         Movie actual1 = actualMovies.get(0);
@@ -96,7 +96,7 @@ public class JdbcMovieDaoTest {
         secondMiovie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1._SY209_CR0,0,140,209_.jpg");
         expectedMovies.add(secondMiovie);
 
-        List<Movie> actualMovies = jdbcMovieDao.getByGenre(1, new HashMap());
+        List<Movie> actualMovies = jdbcMovieDao.getByGenre(1);
         assertEquals(2, actualMovies.size());
 
         Movie actual1 = actualMovies.get(0);
