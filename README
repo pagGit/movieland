@@ -13,3 +13,10 @@ See response example in [b-1].
 1. As list of genres is rather static, we can save time on DB calling. Instead of reading genres from DB, we will create genre cache to store them all.
 2. In order to have relevant information, genre cache should be updated according to DB data each 4 hours.
 -------------------------------------------------------------
+[b-5] Implement sorting
+
+While sending request to get all movies [b-1] and get movies by genre [b-3], user should be able to sort requested movies by rating (desc) or price (acs/desc).
+
+In order to do that, user should add parameter to request.
+For example, /v1/movie?rating=desc
+------------------------------------------------------------

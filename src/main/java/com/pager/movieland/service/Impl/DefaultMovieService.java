@@ -1,5 +1,6 @@
 package com.pager.movieland.service.Impl;
 
+import com.pager.movieland.common.QueryParams;
 import com.pager.movieland.dao.MovieDao;
 import com.pager.movieland.entity.Movie;
 import com.pager.movieland.service.MovieService;
@@ -19,8 +20,18 @@ public class DefaultMovieService implements MovieService {
     }
 
     @Override
+    public List<Movie> getAll(QueryParams queryParams) {
+        return movieDao.getAll(queryParams);
+    }
+
+    @Override
     public List<Movie> getByGenre(int genreId) {
         return movieDao.getByGenre(genreId);
+    }
+
+    @Override
+    public List<Movie> getByGenre(int genreId, QueryParams queryParams) {
+        return movieDao.getByGenre(genreId, queryParams);
     }
 
     @Autowired

@@ -4,7 +4,6 @@ import com.pager.movieland.dao.jdbc.JdbcMovieDao;
 import com.pager.movieland.entity.Movie;
 import org.junit.Test;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

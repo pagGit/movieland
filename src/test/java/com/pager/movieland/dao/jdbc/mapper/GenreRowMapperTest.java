@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GenreRowMapperTestg {
+public class GenreRowMapperTest {
     @Test
     public void testRowMap() throws SQLException {
         ResultSet resultSet = mock(ResultSet.class);
