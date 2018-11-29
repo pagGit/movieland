@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="getAllMoviesSQL" class="java.lang.String">
+        <constructor-arg value="SELECT m.movie_id id, m.name_ru nameRussian, m.name_orig nameNative, m.release_year yearOfRelease, m.rating, m.price, m.picture_path picturePath FROM movie m order by m.movie_id"/>
+    </bean>
+
+    <bean id="getAllGenreSQL" class="java.lang.String">
+        <constructor-arg value="SELECT g.genre_id id, g.genre_name name FROM genre g order by g.genre_id"/>
+    </bean>
+
+</beans>

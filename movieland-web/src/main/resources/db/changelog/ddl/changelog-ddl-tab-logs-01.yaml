@@ -1,0 +1,29 @@
+databaseChangeLog:
+- changeSet:
+    id: ddl-tab-logs-01
+    dbms: postgresql
+    author: pager
+    comment: Creates a table for database logs.
+    changes:
+    - createTable:
+        tableName: logs
+        schemaName: public
+        columns:
+        - column:
+            name: log_id
+            type: bigint
+            constraints:
+              primaryKey: true
+              nullable: false
+        - column:
+            name: log_message
+            type: varchar(4000)
+        - column:
+            name: created_by
+            type: int
+        - column:
+            name: create_datetime
+            type: dateTime
+    rollback:
+    - droptable:
+        tableName: logs

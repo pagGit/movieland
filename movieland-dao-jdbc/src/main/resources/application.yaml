@@ -1,0 +1,6 @@
+dataSource:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/movieland
+  user: postgres
+  pass: 123456
+  maxTotal: 10

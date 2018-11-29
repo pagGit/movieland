@@ -20,3 +20,6 @@ While sending request to get all movies [b-1] and get movies by genre [b-3], use
 In order to do that, user should add parameter to request.
 For example, /v1/movie?rating=desc
 ------------------------------------------------------------
+[mm-1] Maven Multi module
+
+------------------------------------------------------------
