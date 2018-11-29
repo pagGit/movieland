@@ -25,7 +25,7 @@
     </modules>
 
     <build>
-        <finalName>movieland</finalName>
+        <!--<finalName>movieland</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -42,14 +42,6 @@
                 <version>2.22.1</version>
                 <configuration>
                     <argLine>-Dfile.encoding=UTF8</argLine>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/</path>
                 </configuration>
             </plugin>
         </plugins>
