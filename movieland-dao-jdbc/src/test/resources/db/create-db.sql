@@ -27,3 +27,14 @@ create table movie_genre
 )
 ;
 
+create table country
+(
+	country_id serial not null
+		constraint country_pkey
+			primary key,
+	country_name varchar(256) not null
+)
+;
+
+
+

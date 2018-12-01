@@ -7,3 +7,6 @@ INSERT INTO genre(genre_id, genre_name) VALUES(2,'криминал');
 INSERT INTO movie_genre(mg_id, movie_id, genre_id) VALUES(1, 1, 1);
 INSERT INTO movie_genre(mg_id, movie_id, genre_id) VALUES(2, 1, 2);
 INSERT INTO movie_genre(mg_id, movie_id, genre_id) VALUES(3, 2, 1);
+
+INSERT INTO country (country_id, country_name) VALUES (1, 'Великобритания');
+INSERT INTO country (country_id, country_name) VALUES (2, 'Италия');

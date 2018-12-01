@@ -18,6 +18,11 @@ public class DefaultGenreService implements GenreService {
         return genreDao.getAll();
     }
 
+    @Override
+    public List<Genre> getByMovieId(int movieId) {
+        return genreDao.getByMovieId(movieId);
+    }
+
     @Autowired
     public void setGenreDao(GenreDao genreDao) {
         this.genreDao = genreDao;

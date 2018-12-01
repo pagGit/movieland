@@ -47,4 +47,28 @@ public class CacheGenreDaoTest {
         assertEquals(expected2.getId(), actual2.getId());
         assertEquals(expected2.getName(), actual2.getName());
     }
+
+    @Test
+    public void testGetByMovieId() {
+        List<Genre> expectedGenres = new ArrayList<>();
+        Genre firstGenre = new Genre(1, "драма");
+        expectedGenres.add(firstGenre);
+        Genre secondGenre = new Genre(2, "криминал");
+        expectedGenres.add(secondGenre);
+
+        List<Genre> actualMovies = cacheGenreDao.getByMovieId(1);
+        assertEquals(2, actualMovies.size());
+
+        Genre actual1 = actualMovies.get(0);
+        Genre expected1 = expectedGenres.get(0);
+
+        assertEquals(expected1.getId(), actual1.getId());
+        assertEquals(expected1.getName(), actual1.getName());
+
+        Genre actual2 = actualMovies.get(1);
+        Genre expected2 = expectedGenres.get(1);
+
+        assertEquals(expected2.getId(), actual2.getId());
+        assertEquals(expected2.getName(), actual2.getName());
+    }
 }

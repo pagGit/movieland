@@ -34,6 +34,15 @@ public class MovieController {
         return movieService.getAll();
     }
 
+    @GetMapping("/movie/{movieId}")
+    public List<Movie> getById(@PathVariable int movieId) {
+
+        logger.debug("[movieId = {}]", movieId);
+
+        return movieService.getById(movieId);
+
+    }
+
     @GetMapping("/movie/genre/{genreId}")
     public List<Movie> getByGenre(@PathVariable int genreId, @RequestParam LinkedHashMap<String, String> requestParams) {
 

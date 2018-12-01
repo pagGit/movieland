@@ -13,7 +13,8 @@ import java.util.List;
 
 @Repository
 public class JdbcGenreDao implements GenreDao {
-    private static final String GET_GENRE_ALL_SQL = "select g.genre_id id, g.genre_name \"name\" from genre g";
+    private static final String GET_GENRE_ALL_SQL = "select g.genre_id, g.genre_name from genre g";
+    private static final String GET_GENRE_BY_MOVIE_ID_SQL = "select mg.genre_id, g.genre_name from movie_genre mg, genre g where mg.genre_id = g.genre_id and mg.movie_id = ?";
     private static final GenreRowMapper GENRE_ROW_MAPPER = new GenreRowMapper();
     private final Logger loger = LoggerFactory.getLogger(getClass());
 
@@ -24,6 +25,15 @@ public class JdbcGenreDao implements GenreDao {
         List<Genre> genres = jdbcTemplate.query(GET_GENRE_ALL_SQL, GENRE_ROW_MAPPER);
 
         loger.debug("Genres {}", genres);
+
+        return genres;
+    }
+
+    @Override
+    public List<Genre> getByMovieId(int movieId) {
+        List<Genre> genres = jdbcTemplate.query(GET_GENRE_BY_MOVIE_ID_SQL, GENRE_ROW_MAPPER, movieId);
+
+        loger.debug("Genres by movieId [movieId = {}], [genres = {}].", movieId, genres);
 
         return genres;
     }
