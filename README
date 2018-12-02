@@ -23,6 +23,10 @@ For example, /v1/movie?rating=desc
 [mm-1] Maven Multi module
 
 ------------------------------------------------------------
+[ss-1] Split Services
+------------------------------------------------------------
+[b-6] Get movie by id
+
 Get specific movie by its id, other-words get movie details.
 
 URL should be /v1/movie/{movieId}, HTTP method GET.
