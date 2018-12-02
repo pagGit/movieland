@@ -72,7 +72,7 @@ public class JdbcMovieDao implements MovieDao {
     @Override
     public List<Movie> getById(int movieId) {
 
-        List<Movie> movies = jdbcTemplate.query(GET_MOVIE_BY_ID_SQL, MOVIE_ROW_MAPPER);
+        List<Movie> movies = jdbcTemplate.query(GET_MOVIE_BY_ID_SQL, MOVIE_ROW_MAPPER, movieId);
 
         logger.trace("Movies by genre [MovieId = {}], [Movies: {}]", movieId, movies);
 
