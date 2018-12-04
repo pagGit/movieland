@@ -14,7 +14,7 @@ public interface MovieService {
 
     List<Movie> getByGenre(int genreId, QueryParams queryParams);
 
-    List<Movie> getById(int movieId);
+    Movie getById(int movieId);
 
-    void enrich(List<Movie> movies);
+    void enrich(Movie movie);
 }

@@ -110,11 +110,13 @@ public class MovieControllerTest {
 
     @Test
     public void testGetById() throws Exception {
+
         Movie movie = new Movie();
         movie.setId(1);
         movie.setNameRussian("Список Шиндлера");
         movie.setNameNative("Schindler's List");
         movie.setYearOfRelease(1993);
+        movie.setDescription("Movie description.");
         movie.setRating(8.7);
         movie.setPrice(150.5);
         movie.setPicturePath("https://images-na.ssl-images-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1._SX140_CR0,0,140,209_.jpg");
@@ -132,8 +134,10 @@ public class MovieControllerTest {
         review.setUser(new User(2,"darlene.edwards15@example.com"));
         review.setText("Гениальное кино! Смотришь и думаешь «Так не бывает!», но позже понимаешь, что только так и должно быть. Начинаешь заново осмысливать значение фразы, которую постоянно используешь в своей жизни, «Надежда умирает последней». Ведь если ты не надеешься, то все в твоей жизни гаснет, не остается смысла. Фильм наполнен бесконечным числом правильных афоризмов. Я уверена, что буду пересматривать его сотни раз.");
         reviews.add(review);
+        movie.setReviews(reviews);
 
-        when(movieService.getById(1)).thenReturn(Arrays.asList(movie));
+        when(movieService.getById(1)).thenReturn(movie);
+        doNothing().when(movieService).enrich(any(Movie.class));
 
         mockMvc.perform(get("/movie/1"))
                 .andExpect(status().isOk())
@@ -143,6 +147,7 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[0].nameRussian", equalTo("Список Шиндлера")))
                 .andExpect(jsonPath("$[0].nameNative", equalTo("Schindler's List")))
                 .andExpect(jsonPath("$[0].yearOfRelease", equalTo(1993)))
+                .andExpect(jsonPath("$[0].description.", equalTo("Movie description.")))
                 .andExpect(jsonPath("$[0].rating", equalTo(8.7)))
                 .andExpect(jsonPath("$[0].price", equalTo(150.5)))
                 .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1._SX140_CR0,0,140,209_.jpg")))

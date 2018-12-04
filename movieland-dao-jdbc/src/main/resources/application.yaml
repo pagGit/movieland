@@ -4,3 +4,6 @@ dataSource:
   user: postgres
   pass: 123456
   maxTotal: 10
+Scheduler:
+  initialDelay: 14400000
+  fixedDelay: 14400000

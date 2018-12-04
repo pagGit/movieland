@@ -37,22 +37,20 @@ public class DefaultMovieService implements MovieService {
     }
 
     @Override
-    public List<Movie> getById(int movieId) {
+    public Movie getById(int movieId) {
 
-        List<Movie> movies = movieDao.getById(movieId);
-        enrich(movies);
+        Movie movie = movieDao.getById(movieId);
+        enrich(movie);
 
-        return movies;
+        return movie;
     }
 
     @Override
-    public void enrich(List<Movie> movies) {
-        movies.forEach(movie -> {
-            int movieId = movie.getId();
-            movie.setCountries(countryService.getByMovieId(movieId));
-            movie.setGenres(genreService.getByMovieId(movieId));
-            movie.setReviews(reviewService.getByMovieId(movieId));
-        });
+    public void enrich(Movie movie) {
+        int movieId = movie.getId();
+        movie.setCountries(countryService.getByMovieId(movieId));
+        movie.setGenres(genreService.getByMovieId(movieId));
+        movie.setReviews(reviewService.getByMovieId(movieId));
     }
 
     @Autowired

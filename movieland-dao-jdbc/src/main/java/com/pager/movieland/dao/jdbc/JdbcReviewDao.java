@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 public class JdbcReviewDao implements ReviewDao {
-    private static final String GET_REVIEWS_BY_MOVIE_ID = "select mr.review_id, mr.user_id, mr.text from movie_review mr where mr.movie_id = ?";
+    private static final String GET_REVIEWS_BY_MOVIE_ID = "select mr.review_id, mr.user_id, u.nick_name, mr.text from movie_review mr, users u where mr.user_id = u.user_id and mr.movie_id = ?";
     private static final ReviewRowMapper REVIEW_ROW_MAPPER = new ReviewRowMapper();
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

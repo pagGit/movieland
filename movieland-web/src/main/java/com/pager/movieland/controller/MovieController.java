@@ -35,7 +35,7 @@ public class MovieController {
     }
 
     @GetMapping("/movie/{movieId}")
-    public List<Movie> getById(@PathVariable int movieId) {
+    public Movie getById(@PathVariable int movieId) {
 
         logger.debug("[movieId = {}]", movieId);
 

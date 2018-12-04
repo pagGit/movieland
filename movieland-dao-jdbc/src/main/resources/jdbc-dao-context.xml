@@ -12,7 +12,7 @@
     </context:component-scan>
 
     <bean id="yamlProperties" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
-        <property name="resources" value="classpath:application.yaml"/>
+        <property name="resources" value="classpath*:application.yaml"/>
     </bean>
 
     <context:property-placeholder properties-ref="yamlProperties"/>

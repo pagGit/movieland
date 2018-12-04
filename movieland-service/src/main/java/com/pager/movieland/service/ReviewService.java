@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface ReviewService {
     List<Review> getByMovieId(int movieId);
-
-//    void enrich(List<Review> reviews);
 }

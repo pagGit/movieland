@@ -18,13 +18,11 @@ public class DefaultReviewServiceTest {
     @Test
     public void testGetByMovieId() {
         ReviewDao mockReviewDao = mock(ReviewDao.class);
-        UserService mockUserService = mock(UserService.class);
         DefaultReviewService defaultReviewService = new DefaultReviewService();
-        defaultReviewService.setUserService(mockUserService);
         defaultReviewService.setReviewDao(mockReviewDao);
 
         Review review = new Review();
-        User user = new User(2);
+        User user = new User(2, "User nickName");
         review.setId(1);
         review.setUser(user);
         review.setText("Review text.");
@@ -32,13 +30,11 @@ public class DefaultReviewServiceTest {
         expectedReviews.add(review);
 
         when(mockReviewDao.getByMovieId(1)).thenReturn(expectedReviews);
-        doNothing().when(mockUserService).enrich(expectedReviews);
 
         List<Review> actualReviews = defaultReviewService.getByMovieId(1);
 
         assertEquals(Arrays.asList(review), actualReviews);
         verify(mockReviewDao, times(1)).getByMovieId(1);
-        verify(mockUserService, times(1)).enrich(any(ArrayList.class));
     }
 
 }

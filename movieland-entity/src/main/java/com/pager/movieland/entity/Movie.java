@@ -8,6 +8,7 @@ public class Movie {
     private String nameRussian;
     private String nameNative;
     private int yearOfRelease;
+    private String description;
     private double rating;
     private double price;
     private String picturePath;
@@ -95,6 +96,14 @@ public class Movie {
         this.reviews = reviews;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,6 +111,7 @@ public class Movie {
         Movie movie = (Movie) o;
         return id == movie.id &&
                 yearOfRelease == movie.yearOfRelease &&
+                Objects.equals(description, movie.description) &&
                 Double.compare(movie.rating, rating) == 0 &&
                 Double.compare(movie.price, price) == 0 &&
                 Objects.equals(nameRussian, movie.nameRussian) &&
@@ -114,7 +124,7 @@ public class Movie {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nameRussian, nameNative, yearOfRelease, rating, price, picturePath, countries, genres, reviews);
+        return Objects.hash(id, nameRussian, nameNative, yearOfRelease,description, rating, price, picturePath, countries, genres, reviews);
     }
 
     @Override
@@ -124,6 +134,7 @@ public class Movie {
                 ", nameRussian='" + nameRussian + '\'' +
                 ", nameNative='" + nameNative + '\'' +
                 ", yearOfRelease=" + yearOfRelease +
+                ", description=" + description +
                 ", rating=" + rating +
                 ", price=" + price +
                 ", picturePath='" + picturePath + '\'' +
