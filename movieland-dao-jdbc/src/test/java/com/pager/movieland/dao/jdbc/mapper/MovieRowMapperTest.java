@@ -19,6 +19,7 @@ public class MovieRowMapperTest {
         when(resultSet.getString("nameRussian")).thenReturn("Побег из Шоушенка");
         when(resultSet.getString("nameNative")).thenReturn("The Shawshank Redemption");
         when(resultSet.getInt("yearOfRelease")).thenReturn(1994);
+        when(resultSet.getString("description")).thenReturn("Movie description.");
         when(resultSet.getDouble("rating")).thenReturn(8.9);
         when(resultSet.getDouble("price")).thenReturn(123.45);
         when(resultSet.getString("picturePath")).thenReturn("https://images-na.ssl-images-amazon.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1._SY209_CR0,0,140,209_.jpg");
@@ -30,6 +31,7 @@ public class MovieRowMapperTest {
         assertEquals("Побег из Шоушенка", actualMovie.getNameRussian());
         assertEquals("The Shawshank Redemption", actualMovie.getNameNative());
         assertEquals(1994, actualMovie.getYearOfRelease());
+        assertEquals("Movie description.", actualMovie.getDescription());
         assertEquals(8.9, actualMovie.getRating(), 0d);
         assertEquals(123.45, actualMovie.getPrice(), 0d);
         assertEquals("https://images-na.ssl-images-amazon.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1._SY209_CR0,0,140,209_.jpg", actualMovie.getPicturePath());

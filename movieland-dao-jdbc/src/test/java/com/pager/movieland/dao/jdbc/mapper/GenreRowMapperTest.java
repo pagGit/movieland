@@ -15,8 +15,8 @@ public class GenreRowMapperTest {
     public void testRowMap() throws SQLException {
         ResultSet resultSet = mock(ResultSet.class);
 
-        when(resultSet.getInt("id")).thenReturn(1);
-        when(resultSet.getString("name")).thenReturn("драма");
+        when(resultSet.getInt("genre_id")).thenReturn(1);
+        when(resultSet.getString("genre_name")).thenReturn("драма");
 
         GenreRowMapper genreMapper = new GenreRowMapper();
         Genre actualGenre = genreMapper.mapRow(resultSet, 0);

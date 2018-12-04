@@ -3,7 +3,6 @@ package com.pager.movieland.service;
 import com.pager.movieland.common.QueryParams;
 import com.pager.movieland.dao.MovieDao;
 import com.pager.movieland.entity.Movie;
-import com.pager.movieland.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +12,9 @@ import java.util.List;
 public class DefaultMovieService implements MovieService {
 
     private MovieDao movieDao;
+    private CountryService countryService;
+    private GenreService genreService;
+    private ReviewService reviewService;
 
     @Override
     public List<Movie> getAll() {
@@ -34,8 +36,42 @@ public class DefaultMovieService implements MovieService {
         return movieDao.getByGenre(genreId, queryParams);
     }
 
+    @Override
+    public Movie getById(int movieId) {
+
+        Movie movie = movieDao.getById(movieId);
+        enrich(movie);
+
+        return movie;
+    }
+
+    @Override
+    public void enrich(Movie movie) {
+        int movieId = movie.getId();
+        movie.setCountries(countryService.getByMovieId(movieId));
+        movie.setGenres(genreService.getByMovieId(movieId));
+        movie.setReviews(reviewService.getByMovieId(movieId));
+    }
+
     @Autowired
     public void setMovieDao(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
+
+    @Autowired
+    public void setCountryService(CountryService countryService) {
+        this.countryService = countryService;
+    }
+
+    @Autowired
+    public void setGenreService(GenreService genreService) {
+        this.genreService = genreService;
+    }
+
+    @Autowired
+    public void setReviewService(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
+
+
 }

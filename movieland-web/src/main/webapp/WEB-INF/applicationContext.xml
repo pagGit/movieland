@@ -15,6 +15,6 @@
         <context:exclude-filter type="regex" expression="com\.pager\.movieland\.controller"/>
     </context:component-scan>
 
-    <import resource="classpath:jdbc-dao-context.xml"/>
+    <import resource="classpath*:jdbc-dao-context.xml"/>
 
 </beans>
