@@ -77,3 +77,24 @@ Response example:
 ]
 }
 ------------------------------------------------------------
+[s-1] Security token service
+
+We need to have security service, which allows to handle auth request with user login and password, and return generated identifier (token) to this user.
+
+1. On server side we will link particular user with generated token (uuid), and in case of incoming request with this token, we will be able to recognize request's owner.
+2. Each link between user and token should be stored in cache (use java, or any other collection) for 2 hours. After this time, it should be removed from cache.
+3. URL to login should be /v1/login, HTTP method POST. 
+Request body example:
+{
+	"email" : "ronald.reynolds66@example.com",
+	"password" : "paco"
+}
+Response example:
+{
+    "uuid": "e5e84a87-2732-422e-8b1a-bd61ad7ec399",
+    "nickname": "Рональд Рейнольдс"
+}
+4. URL to logout should be /v1/logout, HTTP method DELETE. 
+Request header should contain valid "uuid" value.
+5. In case of wrong combination of login\password send back 400 Bad request.
+------------------------------------------------------------

@@ -53,6 +53,10 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+        </dependency>
         <!-- Json -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

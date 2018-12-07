@@ -1,0 +1,12 @@
+databaseChangeLog:
+- changeSet:
+    id: dml-users-upd-nick_name-02
+    dbms: postgresql
+    author: pager
+    comment: Set nick name as firstName + lastName.
+    changes:
+    - sql:
+        sql: update users set nick_name = first_name || ' ' || last_name;
+    rollback:
+    - sql:
+        sql: update users set nick_name = email;
