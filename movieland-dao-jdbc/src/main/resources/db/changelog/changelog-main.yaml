@@ -3,3 +3,5 @@ databaseChangeLog:
     file: db/changelog/ddl/changelog-ddl-tab-logs-01.yaml
 - include:
     file: db/changelog/dml/changelog-dml-users-upd-nick_name-01.yaml
+- include:
+    file: db/changelog/dml/changelog_dml-users-upd-nick_name-02.yaml

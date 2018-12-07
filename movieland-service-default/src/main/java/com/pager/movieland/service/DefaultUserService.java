@@ -3,13 +3,18 @@ package com.pager.movieland.service;
 import com.pager.movieland.dao.UserDao;
 import com.pager.movieland.entity.Review;
 import com.pager.movieland.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.naming.AuthenticationException;
 import java.util.List;
 
 @Service
 public class DefaultUserService implements UserService {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private UserDao userDao;
 
@@ -19,24 +24,42 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
+    public User getByEmail(String email, String password) throws AuthenticationException {
+        try {
+            User user = userDao.getByEmail(email);
+            logger.info("UserId = {}", user.getId());
+            if (user.getPassword().equals(password)) {
+                return user;
+            } else {
+                logger.info("Incorrect password for user {}!", email);
+                throw new AuthenticationException("Incorrect password for user with email - " + email);
+            }
+        } catch (EmptyResultDataAccessException e) {
+            logger.info("User {} doesn't exist!", email);
+            throw new AuthenticationException("User with email - " + email + "doesn't exist!");
+        }
+    }
+
+    @Override
     public void enrich(List<Review> reviews) {
         if (reviews != null) {
             reviews.forEach(review -> enrich(review.getUser())
             );
         }
     }
-        @Override
-        public void enrich (User user){
-            if (user != null && (user.getNickName() == null || user.getNickName().isEmpty())) {
-                int userId = user.getId();
-                String nickName = getById(userId).getNickName();
-                user.setNickName(nickName);
-            }
-        }
 
-        @Autowired
-        public void setUserDao (UserDao userDao){
-            this.userDao = userDao;
+    @Override
+    public void enrich(User user) {
+        if (user != null && (user.getNickName() == null || user.getNickName().isEmpty())) {
+            int userId = user.getId();
+            String nickName = getById(userId).getNickName();
+            user.setNickName(nickName);
         }
-
     }
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+}
