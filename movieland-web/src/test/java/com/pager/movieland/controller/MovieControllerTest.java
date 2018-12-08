@@ -137,32 +137,30 @@ public class MovieControllerTest {
         movie.setReviews(reviews);
 
         when(movieService.getById(1)).thenReturn(movie);
-        doNothing().when(movieService).enrich(any(Movie.class));
 
         mockMvc.perform(get("/movie/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id", equalTo(1)))
-                .andExpect(jsonPath("$[0].nameRussian", equalTo("Список Шиндлера")))
-                .andExpect(jsonPath("$[0].nameNative", equalTo("Schindler's List")))
-                .andExpect(jsonPath("$[0].yearOfRelease", equalTo(1993)))
-                .andExpect(jsonPath("$[0].description.", equalTo("Movie description.")))
-                .andExpect(jsonPath("$[0].rating", equalTo(8.7)))
-                .andExpect(jsonPath("$[0].price", equalTo(150.5)))
-                .andExpect(jsonPath("$[0].picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1._SX140_CR0,0,140,209_.jpg")))
-                .andExpect(jsonPath("$[0].countries", hasSize(1)))
-                .andExpect(jsonPath("$[0].countries[0].id", equalTo(5)))
-                .andExpect(jsonPath("$[0].countries[0].name", equalTo("США")))
-                .andExpect(jsonPath("$[0].genres", hasSize(2)))
-                .andExpect(jsonPath("$[0].genres[0].id", equalTo(1)))
-                .andExpect(jsonPath("$[0].genres[0].name", equalTo("драма")))
-                .andExpect(jsonPath("$[0].genres[1].id", equalTo(2)))
-                .andExpect(jsonPath("$[0].genres[1].name", equalTo("криминал")))
-                .andExpect(jsonPath("$[0].reviews", hasSize(1)))
-                .andExpect(jsonPath("$[0].reviews[0].id", equalTo(1)))
-                .andExpect(jsonPath("$[0].reviews[0].user.id", equalTo(2)))
-                .andExpect(jsonPath("$[0].reviews[0].user.nickName", equalTo("darlene.edwards15@example.com")))
-                .andExpect(jsonPath("$[0].reviews[0].text", equalTo("Гениальное кино! Смотришь и думаешь «Так не бывает!», но позже понимаешь, что только так и должно быть. Начинаешь заново осмысливать значение фразы, которую постоянно используешь в своей жизни, «Надежда умирает последней». Ведь если ты не надеешься, то все в твоей жизни гаснет, не остается смысла. Фильм наполнен бесконечным числом правильных афоризмов. Я уверена, что буду пересматривать его сотни раз.")));
+                .andExpect(jsonPath("$.id", equalTo(1)))
+                .andExpect(jsonPath("$.nameRussian", equalTo("Список Шиндлера")))
+                .andExpect(jsonPath("$.nameNative", equalTo("Schindler's List")))
+                .andExpect(jsonPath("$.yearOfRelease", equalTo(1993)))
+                .andExpect(jsonPath("$.description", equalTo("Movie description.")))
+                .andExpect(jsonPath("$.rating", equalTo(8.7)))
+                .andExpect(jsonPath("$.price", equalTo(150.5)))
+                .andExpect(jsonPath("$.picturePath", equalTo("https://images-na.ssl-images-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1._SX140_CR0,0,140,209_.jpg")))
+                .andExpect(jsonPath("$.countries", hasSize(1)))
+                .andExpect(jsonPath("$.countries[0].id", equalTo(5)))
+                .andExpect(jsonPath("$.countries[0].name", equalTo("США")))
+                .andExpect(jsonPath("$.genres", hasSize(2)))
+                .andExpect(jsonPath("$.genres[0].id", equalTo(1)))
+                .andExpect(jsonPath("$.genres[0].name", equalTo("драма")))
+                .andExpect(jsonPath("$.genres[1].id", equalTo(2)))
+                .andExpect(jsonPath("$.genres[1].name", equalTo("криминал")))
+                .andExpect(jsonPath("$.reviews", hasSize(1)))
+                .andExpect(jsonPath("$.reviews[0].id", equalTo(1)))
+                .andExpect(jsonPath("$.reviews[0].user.id", equalTo(2)))
+                .andExpect(jsonPath("$.reviews[0].user.nickName", equalTo("darlene.edwards15@example.com")))
+                .andExpect(jsonPath("$.reviews[0].text", equalTo("Гениальное кино! Смотришь и думаешь «Так не бывает!», но позже понимаешь, что только так и должно быть. Начинаешь заново осмысливать значение фразы, которую постоянно используешь в своей жизни, «Надежда умирает последней». Ведь если ты не надеешься, то все в твоей жизни гаснет, не остается смысла. Фильм наполнен бесконечным числом правильных афоризмов. Я уверена, что буду пересматривать его сотни раз.")));
     }
 }
