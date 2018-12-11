@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultUserService implements UserService {
@@ -24,19 +25,14 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public User getByEmail(String email, String password) throws AuthenticationException {
-        try {
-            User user = userDao.getByEmail(email);
-            logger.info("UserId = {}", user.getId());
-            if (user.getPassword().equals(password)) {
-                return user;
-            } else {
-                logger.info("Incorrect password for user {}!", email);
-                throw new AuthenticationException("Incorrect password for user with email - " + email);
-            }
-        } catch (EmptyResultDataAccessException e) {
-            logger.info("User {} doesn't exist!", email);
-            throw new AuthenticationException("User with email - " + email + "doesn't exist!");
+    public User getByEmail(String email, String password) {
+        Optional<User> optionalUser = Optional.ofNullable(userDao.getByEmail(email))
+                .filter(userChk -> userChk.getPassword().equals(password));
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            logger.info("Incorrect email or password for user {}!", email);
+            return null;
         }
     }
 

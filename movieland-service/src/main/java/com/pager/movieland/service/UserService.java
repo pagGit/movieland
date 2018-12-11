@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService {
     User getById(int userId);
 
-    User getByEmail(String email, String password) throws AuthenticationException;
+    User getByEmail(String email, String password);
 
     void enrich(List<Review> reviews);
 
