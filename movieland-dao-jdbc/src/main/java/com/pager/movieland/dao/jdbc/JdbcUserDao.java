@@ -29,9 +29,14 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User getByEmail(String email) throws EmptyResultDataAccessException {
-        User user = jdbcTemplate.queryForObject(GET_USER_BY_EMAIL, USER_ROW_MAPPER, email);
-        return user;
+    public User getByEmail(String email) {
+        try {
+            User user = jdbcTemplate.queryForObject(GET_USER_BY_EMAIL, USER_ROW_MAPPER, email);
+            return user;
+        } catch (EmptyResultDataAccessException e) {
+            logger.info("User with email - {} doesn't exist!", email);
+            return null;
+        }
     }
 
     @Autowired

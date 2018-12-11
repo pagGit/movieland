@@ -2,6 +2,7 @@ package com.pager.movieland.service;
 
 import com.pager.movieland.entity.Session;
 import com.pager.movieland.entity.User;
+import com.pager.movieland.service.exception.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.naming.AuthenticationException;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -38,23 +39,20 @@ public class DefaultSecurityService implements SecurityService {
     @Override
     public Session auth(String email, String password) throws AuthenticationException {
 
-        User user = userService.getByEmail(email, password);
-        if (user != null) {
-            Session session = new Session();
-            session.setUser(user);
-            String uuid = UUID.randomUUID().toString();
-            session.setUuid(uuid);
-            session.setExpireDate(LocalDateTime.now().plusSeconds(maxSessionDurationInSeconds));
-            sessions.put(uuid, session);
+        User user = Optional.ofNullable(userService.getByEmail(email, password)).orElseThrow(() -> new AuthenticationException("Incorrect email or password for user - " + email));
+        Session session = new Session();
+        session.setUser(user);
+        String uuid = UUID.randomUUID().toString();
+        session.setUuid(uuid);
+        session.setExpireDate(LocalDateTime.now().plusSeconds(maxSessionDurationInSeconds));
+        sessions.put(uuid, session);
 
-            return session;
-        }
-        return null;
+        return session;
     }
 
     @Scheduled(fixedDelayString = "${scheduler.fixedDelay}", initialDelayString = "${scheduler.initialDelay}")
     public void invalidateCache() {
-        for (Map.Entry<String, Session> entry: sessions.entrySet()) {
+        for (Map.Entry<String, Session> entry : sessions.entrySet()) {
             if (entry.getValue().getExpireDate().isBefore(LocalDateTime.now())) {
                 String uuid = entry.getKey();
                 logout(uuid);

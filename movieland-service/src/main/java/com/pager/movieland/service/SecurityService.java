@@ -2,8 +2,7 @@ package com.pager.movieland.service;
 
 import com.pager.movieland.entity.Session;
 
-import javax.naming.AuthenticationException;
-
+import com.pager.movieland.service.exception.AuthenticationException;
 
 public interface SecurityService {
     Session getSession(String uuid);

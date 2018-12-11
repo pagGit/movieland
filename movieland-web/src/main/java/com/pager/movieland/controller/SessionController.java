@@ -5,14 +5,11 @@ import com.pager.movieland.entity.Session;
 import com.pager.movieland.dto.UserLoginResponseDto;
 import com.pager.movieland.entity.User;
 import com.pager.movieland.service.SecurityService;
+import com.pager.movieland.service.exception.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.naming.AuthenticationException;
-import javax.servlet.http.HttpServletResponse;
-
 
 @RestController
 public class SessionController {
@@ -21,34 +18,19 @@ public class SessionController {
     private SecurityService securityService;
 
     @PostMapping("/login")
-    public void login(@RequestBody User user, HttpServletResponse response) throws Throwable {
+    public UserLoginResponseDto login(@RequestBody User user) throws AuthenticationException {
         logger.debug("[user = {}]", user);
 
         String email = user.getEmail();
         String password = user.getPassword();
-        Session session;
-        try {
-            session = securityService.auth(email, password);
-        } catch (AuthenticationException e) {
-            throw new AuthenticationException("User could not be authenticated: " + email).initCause(e);
-        }
-        if (session != null) {
-            UserLoginResponseDto userLoginResponseDto = DtoConverter.convertToUserLoginResponseDto(session);
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().print(userLoginResponseDto);
-            response.getWriter().flush();
-            response.getWriter().close();
+        Session session = securityService.auth(email, password);
+        UserLoginResponseDto userLoginResponseDto = DtoConverter.convertToUserLoginResponseDto(session);
 
-        } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        }
-
+        return userLoginResponseDto;
     }
 
     @DeleteMapping("/logout")
-    void logout(@RequestHeader String uuid){
+    void logout(@RequestHeader String uuid) {
         securityService.logout(uuid);
     }
 
